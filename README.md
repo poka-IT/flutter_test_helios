@@ -1,16 +1,10 @@
 # flutter_test_helios
 
-A new Flutter project.
+A demo for Helios team.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Import the GraphQL schema from endpoint with `./scripts/generateSquidSchema.sh`
+2. Implement your custom request in `models/graphql.*.graphql`
+3. Generate the Graphql model from schema with `./scripts/generateSquidSchema.sh`
+4. Use your model to request data

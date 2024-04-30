@@ -16,6 +16,8 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   final _scrollController = ScrollController();
   Timer? _debounceTimer;
+
+  // This is a test address
   final address = '5CQ8T4qpbYJq7uVsxGPQ5q2df7x3Wa4aRY6HUWMBYjfLZhnn';
 
   @override
