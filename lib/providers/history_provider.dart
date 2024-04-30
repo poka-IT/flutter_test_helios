@@ -19,6 +19,7 @@ class AccountHistory extends _$AccountHistory {
       String address) async {
     log.d('Building account history for $address');
     this.address = address;
+    _accountHistoryService = AccountHistoryService();
     await _accountHistoryService.fetchNextPage(address);
     return _accountHistoryService.accountHistory;
   }
