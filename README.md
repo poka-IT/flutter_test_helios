@@ -8,3 +8,7 @@ A demo for Helios team.
 2. Implement your custom request in `models/graphql.*.graphql`
 3. Generate the Graphql model from schema with `./scripts/generateSquidSchema.sh`
 4. Use your model to request data
+
+## Package optimizer
+
+run `dart run optimize_packaging.dart`
