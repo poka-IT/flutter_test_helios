@@ -23,7 +23,7 @@ dev_dependencies:
   graphql_codegen: ^0.14.0
   build_runner: ^2.4.9
   riverpod_generator: ^2.4.0
-
+  mocktail: ^1.0.3
   flutter_lints: ^3.0.0
 
 flutter:
