@@ -1,0 +1,19 @@
+targets:
+  $default:
+    builders:
+      graphql_codegen:
+        options:
+          clients:
+            - graphql
+          schema: lib/models/graphql/*.graphql
+          output_dir: lib/models/graphql/
+          scalars:
+            numeric:
+              type: int
+            timestamptz:
+              type: DateTime
+            bytea:
+              type: Uint8List
+            jsonb:
+              type: Map<String, dynamic>
+          addTypenameExcludedPaths: ["subscription", "subscription.foobar"]
