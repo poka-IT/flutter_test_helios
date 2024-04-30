@@ -16,6 +16,7 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   final _scrollController = ScrollController();
   Timer? _debounceTimer;
+  String searchTerm = '';
 
   // This is a test address
   final address = '5CQ8T4qpbYJq7uVsxGPQ5q2df7x3Wa4aRY6HUWMBYjfLZhnn';
@@ -62,6 +63,24 @@ class _HomeState extends ConsumerState<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Helios Test App'),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchTerm = value;
+                });
+              },
+              decoration: const InputDecoration(
+                hintText: 'Search...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+        ),
       ),
       body: historyAsync.when(
         loading: () {
@@ -73,16 +92,25 @@ class _HomeState extends ConsumerState<Home> {
         },
         data: (transactions) {
           Widget transactionList() {
-            if (transactions.isEmpty) {
+            final filteredTransactions = transactions.where((tx) {
+              final fromAddress = tx.fromId?.toLowerCase() ?? '';
+              final toAddress = tx.toId?.toLowerCase() ?? '';
+              final searchTermLower = searchTerm.toLowerCase();
+              return fromAddress.contains(searchTermLower) ||
+                  toAddress.contains(searchTermLower);
+            }).toList();
+
+            if (filteredTransactions.isEmpty) {
               return const Center(
-                  child:
-                      Text('No transactions', style: TextStyle(fontSize: 16)));
+                child: Text('nothing found...', style: TextStyle(fontSize: 16)),
+              );
             }
+
             return ListView.builder(
               controller: _scrollController,
-              itemCount: transactions.length,
+              itemCount: filteredTransactions.length,
               itemBuilder: (context, index) {
-                final tx = transactions[index];
+                final tx = filteredTransactions[index];
                 return TransactionItem(tx, tx.fromId == address);
               },
             );
