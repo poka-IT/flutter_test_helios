@@ -10,7 +10,7 @@ part 'history_provider.g.dart';
 @riverpod
 class AccountHistory extends _$AccountHistory {
   late String address;
-  late AccountHistoryService _accountHistoryService;
+  late AccountHistoryService accountHistoryService;
   StreamSubscription? _historySubscriptions;
   bool _isFirstFetchComplete = false;
 
@@ -19,20 +19,20 @@ class AccountHistory extends _$AccountHistory {
       String address) async {
     log.d('Building account history for $address');
     this.address = address;
-    _accountHistoryService = AccountHistoryService();
-    await _accountHistoryService.fetchNextPage(address);
-    return _accountHistoryService.accountHistory;
+    accountHistoryService = AccountHistoryService();
+    await accountHistoryService.fetchNextPage(address);
+    return accountHistoryService.accountHistory;
   }
 
   Future<void> fetchNextPage([int size = 20]) async {
-    await _accountHistoryService.fetchNextPage(address, size);
-    state = AsyncValue.data(_accountHistoryService.accountHistory);
+    await accountHistoryService.fetchNextPage(address, size);
+    state = AsyncValue.data(accountHistoryService.accountHistory);
   }
 
   Future<void> refetchData([int size = 20]) async {
     state = const AsyncValue.loading();
-    await _accountHistoryService.refetchData(address, size);
-    state = AsyncValue.data(_accountHistoryService.accountHistory);
+    await accountHistoryService.refetchData(address, size);
+    state = AsyncValue.data(accountHistoryService.accountHistory);
   }
 
   void subscribeToAccountHistory() {
