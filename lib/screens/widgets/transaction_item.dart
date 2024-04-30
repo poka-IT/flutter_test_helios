@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test_helios/models/graphql/accounts.graphql.dart';
+import 'package:flutter_test_helios/screens/details.dart';
 import 'package:flutter_test_helios/services/utils.dart';
 import 'package:intl/intl.dart';
 
@@ -29,6 +30,10 @@ class TransactionItem extends ConsumerWidget {
           fontSize: 14,
         ),
       ),
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DetailsAccount(transaction)));
+      },
     );
   }
 }
