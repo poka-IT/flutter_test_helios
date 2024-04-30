@@ -13,12 +13,10 @@ class SquidService {
     return _client!;
   }
 
-  static Future<void> init(List<String> endpoints) async {
-    const squidEndpoint = 'https://gdev-squid.axiom-team.fr/v1beta1/relay';
-
+  static Future<void> init(String endpoint) async {
     _client = GraphQLClient(
       cache: GraphQLCache(),
-      link: WebSocketLink(squidEndpoint),
+      link: WebSocketLink(endpoint),
     );
   }
 }
