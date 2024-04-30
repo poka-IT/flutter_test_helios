@@ -24,7 +24,7 @@ class SquidService {
 extension DurtGraphQLClient on GraphQLClient {
   Future<Query$GetAccountHistory$transferConnection?> getAccountHistory(
       String address,
-      {int number = 10,
+      {int number = 20,
       String? cursor}) async {
     final variables = Variables$Query$GetAccountHistory(
         address: address, first: number, after: cursor);
